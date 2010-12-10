@@ -793,25 +793,11 @@ public class InstalledAppDetails extends Activity implements View.OnClickListene
             if (mPackageMoveObserver == null) {
                 mPackageMoveObserver = new PackageMoveObserver();
             }
-
-            if ((mAppInfo.flags & ApplicationInfo.FLAG_EXTERNAL_STORAGE) != 0 ||
-                (mAppInfo.flags & ApplicationInfo.FLAG_SDEXT_STORAGE) == 0) {
-                int moveFlags = (mAppInfo.flags & PackageManager.MOVE_SDEXT);
-                mMoveInProgress = true;
-                refreshButtons();
-                mPm.movePackage(mAppInfo.packageName, mPackageMoveObserver, moveFlags);
-            } else if ((mAppInfo.flags & ApplicationInfo.FLAG_EXTERNAL_STORAGE) != 0 &&
-                       (mAppInfo.flags & ApplicationInfo.FLAG_SDEXT_STORAGE) != 0) {
-                int moveFlags = (mAppInfo.flags & PackageManager.MOVE_INTERNAL);
-                mMoveInProgress = true;
-                refreshButtons();
-                mPm.movePackage(mAppInfo.packageName, mPackageMoveObserver, moveFlags);
-            } else {
-                int moveFlags = (mAppInfo.flags & PackageManager.MOVE_INTERNAL);
-                mMoveInProgress = true;
-                refreshButtons();
-                mPm.movePackage(mAppInfo.packageName, mPackageMoveObserver, moveFlags);
-            }
+            int moveFlags = (mAppInfo.flags & ApplicationInfo.FLAG_SDEXT_STORAGE) != 0 ?
+                    PackageManager.MOVE_INTERNAL : PackageManager.MOVE_SDEXT;
+            mMoveInProgress = true;
+            refreshButtons();
+            mPm.movePackage(mAppInfo.packageName, mPackageMoveObserver, moveFlags);
         }
     }
 }
