@@ -700,7 +700,12 @@ public class ManageApplications extends TabActivity implements
         if (filterOption == FILTER_APPS_SDCARD) {
             for (ApplicationInfo appInfo : pAppList) {
                 boolean flag = false;
-                if ((appInfo.flags & ApplicationInfo.FLAG_EXTERNAL_STORAGE) != 0) {
+                String CurApkRootDir = appInfo.sourceDir.substring(1);
+                int idx = CurApkRootDir.indexOf('/');
+                String CurLoc = appInfo.sourceDir.substring(1, idx+1);
+                boolean OnSDEXT = CurLoc.equals("sd-ext");
+                if ((appInfo.flags & ApplicationInfo.FLAG_EXTERNAL_STORAGE) != 0 || 
+                    (appInfo.flags & ApplicationInfo.FLAG_SDEXT_STORAGE) != 0 || OnSDEXT ) {
                     // App on sdcard
                     flag = true;
                 }
