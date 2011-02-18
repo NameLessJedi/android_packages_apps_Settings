@@ -623,8 +623,9 @@ public class ManageApplications extends TabActivity implements
         if (filterOption == FILTER_APPS_SDCARD) {
             List<ApplicationInfo> appList =new ArrayList<ApplicationInfo> ();
             for (ApplicationInfo appInfo : installedAppList) {
-                if ((appInfo.flags & ApplicationInfo.FLAG_EXTERNAL_STORAGE) != 0) {
-                    // App on sdcard
+                if ((appInfo.flags & ApplicationInfo.FLAG_EXTERNAL_STORAGE) != 0 ||
+                        (appInfo.flags & ApplicationInfo.FLAG_SDEXT_STORAGE) != 0) {
+                    // App on sdcard (including sd-ext)
                     appList.add(appInfo);
                 }
             }
@@ -700,12 +701,8 @@ public class ManageApplications extends TabActivity implements
         if (filterOption == FILTER_APPS_SDCARD) {
             for (ApplicationInfo appInfo : pAppList) {
                 boolean flag = false;
-                String CurApkRootDir = appInfo.sourceDir.substring(1);
-                int idx = CurApkRootDir.indexOf('/');
-                String CurLoc = appInfo.sourceDir.substring(1, idx+1);
-                boolean OnSDEXT = CurLoc.equals("sd-ext");
                 if ((appInfo.flags & ApplicationInfo.FLAG_EXTERNAL_STORAGE) != 0 || 
-                    (appInfo.flags & ApplicationInfo.FLAG_SDEXT_STORAGE) != 0 || OnSDEXT ) {
+                    (appInfo.flags & ApplicationInfo.FLAG_SDEXT_STORAGE) != 0) {
                     // App on sdcard
                     flag = true;
                 }
@@ -1137,6 +1134,7 @@ public class ManageApplications extends TabActivity implements
                 holder.appName = (TextView) convertView.findViewById(R.id.app_name);
                 holder.appIcon = (ImageView) convertView.findViewById(R.id.app_icon);
                 holder.appSize = (TextView) convertView.findViewById(R.id.app_size);
+
                 convertView.setTag(holder);
             } else {
                 // Get the ViewHolder back to get fast access to the TextView
@@ -1148,6 +1146,7 @@ public class ManageApplications extends TabActivity implements
             ApplicationInfo appInfo = mAppLocalList.get(position);
             AppInfo mInfo = mCache.getEntry(appInfo.packageName);
             if(mInfo != null) {
+                String sdext = ((appInfo.flags & ApplicationInfo.FLAG_SDEXT_STORAGE) != 0) ? " (SD-Ext)":"";
                 if(mInfo.appName != null) {
                     holder.appName.setText(mInfo.appName);
                 }
@@ -1155,7 +1154,7 @@ public class ManageApplications extends TabActivity implements
                     holder.appIcon.setImageDrawable(mInfo.appIcon);
                 }
                 if (mInfo.appSize != null) {
-                    holder.appSize.setText(mInfo.appSize);
+                    holder.appSize.setText(mInfo.appSize + sdext);
                 }
             } else {
                 Log.w(TAG, "No info for package:"+appInfo.packageName+" in property map");
@@ -1280,7 +1279,8 @@ public class ManageApplications extends TabActivity implements
                     return true;
                 }
             } else if (filterOption == FILTER_APPS_SDCARD) {
-                if ((info.flags & ApplicationInfo.FLAG_EXTERNAL_STORAGE) != 0) {
+                if ((info.flags & ApplicationInfo.FLAG_EXTERNAL_STORAGE) != 0 ||
+                        (info.flags & ApplicationInfo.FLAG_SDEXT_STORAGE) != 0 ) {
                     return true;
                 }
             } else {

@@ -308,7 +308,8 @@ public class InstalledAppDetails extends Activity implements View.OnClickListene
             mMoveAppButtonR.setEnabled(false);
         } else if (!allowMoveAllApps && moveDisable) {
             mMoveAppButtonR.setEnabled(false);
-        } else if (!android.os.SystemProperties.getBoolean("cm.a2sd.active", false)) {
+        } else if (!android.os.Environment.getSdExtState().
+                equals(android.os.Environment.MEDIA_MOUNTED)) {
             mMoveAppButtonR.setEnabled(false);
         } else {
             mMoveAppButtonR.setOnClickListener(this);
