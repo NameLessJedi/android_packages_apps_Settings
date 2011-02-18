@@ -1286,6 +1286,8 @@
     <string name="internal_memory">Internal phone storage</string>
     <!-- SD card & phone storage settings screen heading. This is displayed above items that pertain to the SD card -->
     <string name="sd_memory">SD card</string>
+    <!-- SD card & phone storage settings screen heading. This is displayed above itmes that pertain to the SDExt -->
+    <string name="sdext_memory">SD-Ext</string>
 
     <!-- SD card & phone storage settings title. The amount of free space for some storage partition.  For example, this is listed under both the "Internal phone storage" section and the "SD card" section. -->
     <string name="memory_available">Available space</string>
@@ -1294,7 +1296,7 @@
     <!-- SD card & phone storage settings item title that will result in the phone unmounting the SD card.  This will be done before the user phyiscally removes the SD card from the phone.  Kind of like the "Safely remove" on some operating systems.   -->
     <string name="sd_eject">Unmount SD card</string>
     <!-- SD card & phone storage settings item title that will result in the phone unmounting the SD card.  This will be done before the user phyiscally removes the SD card from the phone.  Kind of like the "Safely remove" on some operating systems.   -->
-    <string name="sd_eject_summary">Unmount the SD card for safe removal</string>
+    <string name="sd_eject_summary">Unmount the SD card.\nDo not eject SD card!</string>
 
 
     <!-- SD card & phone storage settings item summary that is displayed when no SD card is inserted -->
@@ -1314,7 +1316,7 @@
     <!-- SD card eject confirmation dialog title   -->
     <string name="dlg_confirm_unmount_title">Unmount SD card</string>
     <!-- SD card eject confirmation dialog  -->
-    <string name="dlg_confirm_unmount_text">If you unmount the SD card, some applications you are using will stop and may be unavailable until you remount the SD card.</string>
+    <string name="dlg_confirm_unmount_text">If you unmount the SD card, some applications you are using will stop and may be unavailable until you remount the SD card. If you have any applications on SD-Ext DO NOT eject the card.</string>
     <!-- SD card eject error dialog title   -->
     <string name="dlg_error_unmount_title">Unmount SD card failed</string>
     <!-- SD card eject error dialog text   -->

@@ -519,7 +519,7 @@
     <string name="memory_available" msgid="418542433817289474">"Dostępne miejsce"</string>
     <string name="memory_size" msgid="6629067715017232195">"Całkowita pojemność"</string>
     <string name="sd_eject" msgid="6915293408836853020">"Odłącz kartę SD"</string>
-    <string name="sd_eject_summary" msgid="3315557796211542962">"Odłącz kartę SD, aby bezpiecznie ją usunąć"</string>
+    <string name="sd_eject_summary" msgid="3315557796211542962">"Odłącz kartę SD. NIE wyjmuj karty!"</string>
     <string name="sd_insert_summary" msgid="2048640010381803841">"Włóż kartę SD w celu zainstalowania"</string>
     <string name="sd_mount" msgid="5940523765187704135">"Zainstaluj kartę SD"</string>
     <string name="sd_mount_summary" msgid="4936591681679097699">"Zainstaluj kartę SD"</string>
@@ -528,7 +528,7 @@
     <string name="sd_unavailable" msgid="8580107589533213904">"Niedostępna"</string>
     <string name="read_only" msgid="6702420168629076340">" (Tylko do odczytu)"</string>
     <string name="dlg_confirm_unmount_title" msgid="8612140627310646730">"Odinstaluj kartę SD"</string>
-    <string name="dlg_confirm_unmount_text" msgid="5851214273718817727">"Jeśli odinstalujesz kartę SD, niektóre używane aplikacje zostaną zatrzymane i mogą być niedostępne do chwili jej ponownego zainstalowania."</string>
+    <string name="dlg_confirm_unmount_text" msgid="5851214273718817727">"Jeśli odinstalujesz kartę SD, niektóre używane aplikacje zostaną zatrzymane i mogą być niedostępne do chwili jej ponownego zainstalowania. Jeśli masz aplikacje zainstalowane na SD-Ext NIE WYJMUJ karty z telefonu."</string>
     <string name="dlg_error_unmount_title" msgid="4004106918266783081">"Odinstalowanie karty SD nie powiodło się"</string>
     <string name="dlg_error_unmount_text" msgid="9188972789897713180">"Nie można odinstalować karty SD. Spróbuj ponownie później."</string>
     <string name="unmount_inform_text" msgid="3213378327712151498">"Karta SD zostanie odinstalowana. Sprawdź stan w obszarze powiadomień."</string>
