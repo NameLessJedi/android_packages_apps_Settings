@@ -961,6 +961,7 @@ public class ManageApplications extends TabActivity implements
         TextView appName;
         ImageView appIcon;
         TextView appSize;
+        TextView appLoc;
     }
     
     /* 
@@ -1134,6 +1135,7 @@ public class ManageApplications extends TabActivity implements
                 holder.appName = (TextView) convertView.findViewById(R.id.app_name);
                 holder.appIcon = (ImageView) convertView.findViewById(R.id.app_icon);
                 holder.appSize = (TextView) convertView.findViewById(R.id.app_size);
+                holder.appLoc = (TextView) convertView.findViewById(R.id.app_loc);
 
                 convertView.setTag(holder);
             } else {
@@ -1146,7 +1148,7 @@ public class ManageApplications extends TabActivity implements
             ApplicationInfo appInfo = mAppLocalList.get(position);
             AppInfo mInfo = mCache.getEntry(appInfo.packageName);
             if(mInfo != null) {
-                String sdext = ((appInfo.flags & ApplicationInfo.FLAG_SDEXT_STORAGE) != 0) ? " (SD-Ext)":"";
+                String Location = ((appInfo.flags & ApplicationInfo.FLAG_SDEXT_STORAGE) != 0) ? "SD-Ext":"";
                 if(mInfo.appName != null) {
                     holder.appName.setText(mInfo.appName);
                 }
@@ -1154,8 +1156,9 @@ public class ManageApplications extends TabActivity implements
                     holder.appIcon.setImageDrawable(mInfo.appIcon);
                 }
                 if (mInfo.appSize != null) {
-                    holder.appSize.setText(mInfo.appSize + sdext);
+                    holder.appSize.setText(mInfo.appSize);
                 }
+                holder.appLoc.setText(Location);
             } else {
                 Log.w(TAG, "No info for package:"+appInfo.packageName+" in property map");
             }

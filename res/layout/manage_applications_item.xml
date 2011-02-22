@@ -48,12 +48,20 @@
             android:singleLine="true"
             android:ellipsize="marquee"
             android:layout_marginBottom="2dip" />
-        <TextView android:id="@+id/app_size"
-            android:layout_marginTop="-4dip"
-            android:layout_gravity="center_vertical"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceSmall" />
+        <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:stretchColumns="1">
+            <TableRow>
+                <TextView android:id="@+id/app_size"
+                    android:gravity="left"
+                    android:textAppearance="?android:attr/textAppearanceSmall" />
+                <TextView android:id="@+id/app_loc"
+                    android:gravity="right"
+                    android:textColor="#BBBBFF"
+                    android:textAppearance="?android:attr/textAppearanceSmall" />
+            </TableRow>
+        </TableLayout>
     </LinearLayout>
 </LinearLayout>
 
