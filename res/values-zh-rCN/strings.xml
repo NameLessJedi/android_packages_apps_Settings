@@ -1130,6 +1130,5 @@
     <string name="proxy_wifi_on">在 WIFI 上也使用代理</string>
 
     <!-- CyanogenMod -->
-    <string name="cm_settings_title">CyanogenMod 设置</string>
     <string name="mod_version">Mod 版本</string>
 </resources>
