@@ -69,4 +69,11 @@
             android:summary="@string/pref_volume_wake_summary"
             android:defaultValue="false" />
 
+        <ListPreference
+            android:key="pref_sweep_to_wake"
+            android:title="@string/pref_sweep_to_wake_title"
+            android:summary="@string/pref_sweep_to_wake_summary"
+            android:entries="@array/pref_sweep_to_wake_entries"
+            android:entryValues="@array/pref_sweep_to_wake_values" />
+
 </PreferenceScreen>

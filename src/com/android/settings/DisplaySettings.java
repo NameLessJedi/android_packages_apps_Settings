@@ -63,6 +63,9 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
     private static final String KEY_WAKEUP_CATEGORY = "category_wakeup_options";
     private static final String KEY_VOLUME_WAKE = "pref_volume_wake";
 
+    public  static final String KEY_SWEEP2WAKE = "pref_sweep_to_wake";
+    public  static final String SWEEP2WAKE_FILE = "/sys/android_touch/sweep2wake";
+
     // Strings used for building the summary
     private static final String ROTATION_ANGLE_0 = "0";
     private static final String ROTATION_ANGLE_90 = "90";
@@ -85,6 +88,8 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
     private WifiDisplayStatus mWifiDisplayStatus;
     private Preference mWifiDisplayPreference;
 
+    private ListPreference mSweep2Wake;
+
     private ContentObserver mAccelerometerRotationObserver =
             new ContentObserver(new Handler()) {
         @Override
@@ -104,6 +109,9 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        final boolean hasSweep2Wake = Utils.fileExists(SWEEP2WAKE_FILE);
+
         ContentResolver resolver = getActivity().getContentResolver();
 
         addPreferencesFromResource(R.xml.display_settings);
@@ -149,6 +157,16 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
                 mVolumeWake.setChecked(Settings.System.getInt(resolver,
                         Settings.System.VOLUME_WAKE_SCREEN, 0) == 1);
             }
+        }
+
+        mSweep2Wake = (ListPreference) findPreference(KEY_SWEEP2WAKE);
+        if (hasSweep2Wake) {
+            int sweep2Wake = Settings.System.getInt(resolver,Settings.System.SWEEP2WAKE, 0);
+            mSweep2Wake.setValue(Integer.toString(sweep2Wake));
+            mSweep2Wake.setSummary(mSweep2Wake.getEntry());
+            mSweep2Wake.setOnPreferenceChangeListener(this);
+        } else {
+            getPreferenceScreen().removePreference(mSweep2Wake);
         }
 
     }
@@ -392,6 +410,16 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
     }
 
     public boolean onPreferenceChange(Preference preference, Object objValue) {
+        if (preference == mSweep2Wake) {
+            int value = Integer.valueOf((String) objValue);
+            int index = mSweep2Wake.findIndexOfValue((String) objValue);
+            if (Utils.fileWriteOneLine(SWEEP2WAKE_FILE, (String) objValue + "\n")) {
+                mSweep2Wake.setSummary(mSweep2Wake.getEntries()[index]);
+                Settings.System.putInt(getContentResolver(), Settings.System.SWEEP2WAKE, value);
+            }
+            return true;
+        }
+
         final String key = preference.getKey();
         if (KEY_SCREEN_TIMEOUT.equals(key)) {
             int value = Integer.parseInt((String) objValue);

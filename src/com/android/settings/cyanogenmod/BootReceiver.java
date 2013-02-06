@@ -25,6 +25,7 @@ import android.preference.PreferenceManager;
 import android.util.Log;
 
 import com.android.settings.Utils;
+import com.android.settings.DisplaySettings;
 
 import java.util.Arrays;
 import java.util.List;
@@ -139,5 +140,16 @@ public class BootReceiver extends BroadcastReceiver {
 
         Utils.fileWriteOneLine(MemoryManagement.KSM_RUN_FILE, ksm ? "1" : "0");
         Log.d(TAG, "KSM settings restored.");
+    }
+
+    private void configureSweep2Wake(Context ctx) {
+        if (Utils.fileExists(DisplaySettings.SWEEP2WAKE_FILE)) {
+            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(ctx);
+            int sweep2Wake = prefs.getInt(DisplaySettings.KEY_SWEEP2WAKE, 0);
+
+            if (Utils.fileWriteOneLine(DisplaySettings.SWEEP2WAKE_FILE, Integer.toString(sweep2Wake) + "\n")) {
+                Log.d(TAG, "Sweep 2 Wake settings restored.");
+            }
+        }
     }
 }
