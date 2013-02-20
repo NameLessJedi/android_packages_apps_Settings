@@ -65,6 +65,8 @@ public class BootReceiver extends BroadcastReceiver {
                 SystemProperties.set(KSM_SETTINGS_PROP, "false");
             }
         }
+
+        configureSweep2Wake(ctx);
     }
 
     private void configureCPU(Context ctx) {
