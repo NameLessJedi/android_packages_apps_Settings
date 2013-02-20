@@ -90,6 +90,7 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
     private Preference mWifiDisplayPreference;
 
     private ListPreference mSweep2Wake;
+    private static boolean hasSweep2Wake;
 
     private ContentObserver mAccelerometerRotationObserver =
             new ContentObserver(new Handler()) {
@@ -111,7 +112,7 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        final boolean hasSweep2Wake = Utils.fileExists(SWEEP2WAKE_FILE);
+        hasSweep2Wake = Utils.fileExists(SWEEP2WAKE_FILE);
 
         ContentResolver resolver = getActivity().getContentResolver();
 
@@ -341,7 +342,7 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
 
         if (hasSweep2Wake) {
             String currentState = Utils.fileReadOneLine(SWEEP2WAKE_FILE);
-            int sweep2Wake = Settings.System.getInt(resolver,Settings.System.SWEEP2WAKE, 0);
+            int sweep2Wake = Settings.System.getInt(getContentResolver(),Settings.System.SWEEP2WAKE, 0);
             if (!currentState.equals(Integer.toString(sweep2Wake))) {
                 mSweep2Wake.setValue(currentState);
                 mSweep2Wake.setSummary(mSweep2Wake.getEntry());
