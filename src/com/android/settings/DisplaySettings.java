@@ -163,8 +163,16 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
 
         mSweep2Wake = (ListPreference) findPreference(KEY_SWEEP2WAKE);
         if (hasSweep2Wake) {
+            String currentState = Utils.fileReadOneLine(SWEEP2WAKE_FILE);
             int sweep2Wake = Settings.System.getInt(resolver,Settings.System.SWEEP2WAKE, 0);
-            mSweep2Wake.setValue(Integer.toString(sweep2Wake));
+            if ( ! currentState.equals(Integer.toString(sweep2Wake)) {
+                if (Utils.fileWriteOneLine(SWEEP2WAKE_FILE, Integer.toString(sweep2Wake) + "\n")) {
+                    mSweep2Wake.setValue(Integer.toString(sweep2Wake));
+                } else {
+                    mSweep2Wake.setValue(currentState);
+                    Settings.System.putInt(getContentResolver(), Settings.System.SWEEP2WAKE, Integer.valueOf(currentState));
+                }
+            }
             mSweep2Wake.setSummary(mSweep2Wake.getEntry());
             mSweep2Wake.setOnPreferenceChangeListener(this);
         } else {
@@ -330,6 +338,16 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
         }
 
         updateState();
+
+        if (hasSweep2Wake) {
+            String currentState = Utils.fileReadOneLine(SWEEP2WAKE_FILE);
+            int sweep2Wake = Settings.System.getInt(resolver,Settings.System.SWEEP2WAKE, 0);
+            if (!currentState.equals(Integer.toString(sweep2Wake)) {
+                mSweep2Wake.setValue(currentState);
+                mSweep2Wake.setSummary(mSweep2Wake.getEntry());
+                Settings.System.putInt(getContentResolver(), Settings.System.SWEEP2WAKE, Integer.valueOf(currentState));
+            }
+        }
     }
 
     @Override
