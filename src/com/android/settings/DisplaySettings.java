@@ -165,7 +165,7 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
         if (hasSweep2Wake) {
             String currentState = Utils.fileReadOneLine(SWEEP2WAKE_FILE);
             int sweep2Wake = Settings.System.getInt(resolver,Settings.System.SWEEP2WAKE, 0);
-            if ( ! currentState.equals(Integer.toString(sweep2Wake)) {
+            if ( ! currentState.equals(Integer.toString(sweep2Wake))) {
                 if (Utils.fileWriteOneLine(SWEEP2WAKE_FILE, Integer.toString(sweep2Wake) + "\n")) {
                     mSweep2Wake.setValue(Integer.toString(sweep2Wake));
                 } else {
@@ -342,7 +342,7 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
         if (hasSweep2Wake) {
             String currentState = Utils.fileReadOneLine(SWEEP2WAKE_FILE);
             int sweep2Wake = Settings.System.getInt(resolver,Settings.System.SWEEP2WAKE, 0);
-            if (!currentState.equals(Integer.toString(sweep2Wake)) {
+            if (!currentState.equals(Integer.toString(sweep2Wake))) {
                 mSweep2Wake.setValue(currentState);
                 mSweep2Wake.setSummary(mSweep2Wake.getEntry());
                 Settings.System.putInt(getContentResolver(), Settings.System.SWEEP2WAKE, Integer.valueOf(currentState));
