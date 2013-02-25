@@ -26,6 +26,7 @@ import android.util.Log;
 
 import com.android.settings.Utils;
 import com.android.settings.DisplaySettings;
+import android.provider.Settings;
 
 import java.util.Arrays;
 import java.util.List;
