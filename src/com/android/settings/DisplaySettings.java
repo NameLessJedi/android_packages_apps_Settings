@@ -171,7 +171,6 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
                     mSweep2Wake.setValue(Integer.toString(sweep2Wake));
                 } else {
                     mSweep2Wake.setValue(currentState);
-                    Settings.System.putInt(getContentResolver(), Settings.System.SWEEP2WAKE, Integer.valueOf(currentState));
                 }
             }
             mSweep2Wake.setSummary(mSweep2Wake.getEntry());

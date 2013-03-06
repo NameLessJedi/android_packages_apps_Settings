@@ -148,9 +148,9 @@ public class BootReceiver extends BroadcastReceiver {
     private void configureSweep2Wake(Context ctx) {
         if (Utils.fileExists(DisplaySettings.SWEEP2WAKE_FILE)) {
             SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(ctx);
-            int sweep2Wake = prefs.getInt(Settings.System.SWEEP2WAKE, 0);
+            String sweep2Wake = prefs.getString(DisplaySettings.KEY_SWEEP2WAKE, null);
 
-            if (Utils.fileWriteOneLine(DisplaySettings.SWEEP2WAKE_FILE, Integer.toString(sweep2Wake) + "\n")) {
+            if (sweep2Wake != null && Utils.fileWriteOneLine(DisplaySettings.SWEEP2WAKE_FILE, sweep2Wake + "\n")) {
                 Log.d(TAG, "Sweep 2 Wake settings restored.");
             }
         }
